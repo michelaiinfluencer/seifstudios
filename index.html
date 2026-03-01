@@ -370,7 +370,7 @@
       heroDots[heroIdx].classList.add('active');
 
       const newVid = heroSlides[heroIdx].querySelector('video');
-      if (newVid) { newVid.currentTime = 0; newVid.play(); }
+      if (newVid) { newVid.currentTime = 0; newVid.play().catch(() => { }); }
     }
 
     heroDots.forEach(dot => {
@@ -402,7 +402,7 @@
       reelCounter.textContent = `${reelIdx + 1} / ${reelSlides.length}`;
 
       const newVid = reelSlides[reelIdx].querySelector('video');
-      if (newVid) { newVid.currentTime = 0; newVid.play(); }
+      if (newVid) { newVid.currentTime = 0; newVid.play().catch(() => { }); }
     }
 
     document.getElementById('reelPrev').addEventListener('click', () => goReelSlide(reelIdx - 1));
