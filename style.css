@@ -792,6 +792,17 @@ nav {
   margin-top: 4px;
 }
 
+.form-error {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.06);
+  border: 1px solid rgba(192, 57, 43, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  margin-top: 4px;
+}
+
 .success-msg {
   display: none;
   background: var(--white);

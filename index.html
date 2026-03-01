@@ -315,6 +315,7 @@
             placeholder="Tell us about your project (optional)"></textarea>
           <button type="submit" class="btn-submit" id="submitBtn">Join the Waitlist →</button>
           <p class="form-note">No spam. Ever. We'll only reach out about your project.</p>
+          <p class="form-error" id="formError" style="display:none;"></p>
         </form>
 
         <div class="success-msg" id="successMsg">
@@ -427,9 +428,18 @@
     const waitlistForm = document.getElementById('waitlistForm');
     const submitBtn = document.getElementById('submitBtn');
     const successMsg = document.getElementById('successMsg');
+    const formError = document.getElementById('formError');
+
+    function showFormError(msg) {
+      formError.textContent = msg;
+      formError.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Join the Waitlist →';
+    }
 
     waitlistForm.addEventListener('submit', async function (e) {
       e.preventDefault();
+      formError.style.display = 'none';
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
 
@@ -444,16 +454,21 @@
           waitlistForm.style.display = 'none';
           successMsg.style.display = 'block';
         } else {
-          const data = await response.json();
-          const errMsg = data?.errors?.map(e => e.message).join(', ') || 'Something went wrong. Please try again.';
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Join the Waitlist →';
-          alert(errMsg);
+          const data = await response.json().catch(() => ({}));
+          const errors = data?.errors || [];
+          const hasRecaptcha = errors.some(err =>
+            (err.field || '').toLowerCase().includes('recaptcha') ||
+            (err.message || '').toLowerCase().includes('recaptcha')
+          );
+          if (hasRecaptcha) {
+            showFormError('Submission blocked by reCAPTCHA. Please disable reCAPTCHA in your Formspree dashboard (Settings → reCAPTCHA) and try again.');
+          } else {
+            const msg = errors.map(err => err.message).join(' ') || 'Something went wrong. Please try again.';
+            showFormError(msg);
+          }
         }
       } catch (_) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Join the Waitlist →';
-        alert('Network error — please check your connection and try again.');
+        showFormError('Network error — please check your connection and try again.');
       }
     });
 
