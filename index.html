@@ -40,7 +40,7 @@
         </video>
       </div>
       <div class="hc-slide" data-index="3">
-        <video autoplay muted playsinline>
+        <video muted playsinline>
           <source src="assets/hero-bg.mp4" type="video/mp4">
         </video>
       </div>
@@ -71,78 +71,89 @@
   </div>
 
   <script src="assets/main.js"></script>
-  /* ─── HERO CAROUSEL ─── */
-  const heroSlides = document.querySelectorAll('.hc-slide');
-  let heroIdx = 0;
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* ─── HERO CAROUSEL ─── */
+      const heroSlides = document.querySelectorAll('.hc-slide');
+      let heroIdx = 0;
 
-  function goHeroSlide(idx) {
-  const oldVid = heroSlides[heroIdx].querySelector('video');
-  if (oldVid) oldVid.pause();
-  heroSlides[heroIdx].classList.remove('active');
+      function goHeroSlide(idx) {
+        if (!heroSlides.length) return;
 
-  heroIdx = (idx + heroSlides.length) % heroSlides.length;
+        // Pause current video
+        const oldVid = heroSlides[heroIdx].querySelector('video');
+        if (oldVid) oldVid.pause();
+        heroSlides[heroIdx].classList.remove('active');
 
-  heroSlides[heroIdx].classList.add('active');
+        // Target next index
+        heroIdx = (idx + heroSlides.length) % heroSlides.length;
 
-  const newVid = heroSlides[heroIdx].querySelector('video');
-  if (newVid) {
-  newVid.currentTime = 0;
-  newVid.play().catch(() => { });
-  }
-  }
+        // Transition to next slide
+        heroSlides[heroIdx].classList.add('active');
 
-  // Initialize: Add 'ended' event listener to all videos to trigger the next one
-  heroSlides.forEach((slide, i) => {
-  const video = slide.querySelector('video');
-  if (video) {
-  video.addEventListener('ended', () => {
-  goHeroSlide(heroIdx + 1);
-  });
-  }
-  });
+        // Play new video
+        const newVid = heroSlides[heroIdx].querySelector('video');
+        if (newVid) {
+          newVid.currentTime = 0;
+          newVid.play().catch(err => console.log("Video play blocked:", err));
+        }
+      }
 
-  // Ensure the first video plays if autoplay fails or is delayed
-  const firstVid = heroSlides[0].querySelector('video');
-  if (firstVid) firstVid.play().catch(() => { });
+      // Initialize: Add 'ended' event listener to all videos
+      heroSlides.forEach((slide, i) => {
+        const video = slide.querySelector('video');
+        if (video) {
+          video.addEventListener('ended', () => {
+            // Only advance if this was the active video
+            if (slide.classList.contains('active')) {
+              goHeroSlide(heroIdx + 1);
+            }
+          });
+        }
+      });
 
-  /* ─── SCROLL EFFECTS ─── */
-  const siteHeader = document.querySelector('.site-header');
-  const logoWrap = document.querySelector('.logo-wrap');
+      // Start the first video
+      const firstVid = heroSlides[0]?.querySelector('video');
+      if (firstVid) {
+        firstVid.play().catch(() => {
+          // If browser blocks initial play, clicking anywhere on the document will start it
+          const startOnInteraction = () => {
+            firstVid.play();
+            document.removeEventListener('click', startOnInteraction);
+          };
+          document.addEventListener('click', startOnInteraction);
+        });
+      }
 
-  window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const heroHeight = window.innerHeight;
+      /* ─── SCROLL RELYING ON NAV INJECTION ─── */
+      const checkElements = setInterval(() => {
+        const siteHeader = document.querySelector('.site-header');
+        const logoWrap = document.querySelector('.logo-wrap');
 
-  // 1. Fade out the logo based on scroll depth (0 to 300px)
-  const logoOpacity = Math.max(0, 1 - scrollY / 300);
-  const logoScale = Math.max(0.9, 1 - scrollY / 1000);
+        if (siteHeader && logoWrap) {
+          clearInterval(checkElements);
 
-  if (logoWrap) {
-  logoWrap.style.opacity = logoOpacity;
-  logoWrap.style.transform = `scale(${logoScale})`;
-  logoWrap.style.pointerEvents = logoOpacity < 0.1 ? 'none' : 'auto' ; } // 2. Toggle solid background on nav after
-    passing hero height if (scrollY> heroHeight - 600) {
-    siteHeader.classList.add('scrolled');
-    } else {
-    siteHeader.classList.remove('scrolled');
-    }
+          window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const heroHeight = window.innerHeight;
+
+            const logoOpacity = Math.max(0, 1 - scrollY / 300);
+            const logoScale = Math.max(0.9, 1 - scrollY / 1000);
+
+            logoWrap.style.opacity = logoOpacity;
+            logoWrap.style.transform = `scale(${logoScale})`;
+            logoWrap.style.pointerEvents = logoOpacity < 0.1 ? 'none' : 'auto';
+
+            if (scrollY > heroHeight - 100) {
+              siteHeader.classList.add('scrolled');
+            } else {
+              siteHeader.classList.remove('scrolled');
+            }
+          });
+        }
+      }, 100);
     });
-
-    /* ─── FADE-IN ON SCROLL ─── */
-    const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-    if (entry.isIntersecting) {
-    entry.target.classList.add('visible');
-    observer.unobserve(entry.target);
-    }
-    });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-up').forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 4) * 80}ms`;
-    observer.observe(el);
-    });
-    </script>
+  </script>
 
 </body>
 
