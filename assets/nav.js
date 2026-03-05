@@ -12,9 +12,8 @@ const navContent = `
 
       <ul class="nav-links">
         <li><a href="index.html" data-page="index">Home</a></li>
-        <li><a href="service.html" data-page="service">Service</a></li>
-        <li><a href="image.html" data-page="image">Image</a></li>
-        <li><a href="video.html" data-page="video">Video</a></li>
+        <li><a href="solutions.html" data-page="solutions">Solutions</a></li>
+        <li><a href="portfolio.html" data-page="portfolio">Portfolio</a></li>
         <li><a href="workflow.html" data-page="workflow">Workflow</a></li>
         <li><a href="contact.html" data-page="contact">Contact</a></li>
       </ul>
@@ -40,9 +39,8 @@ const navContent = `
   <div class="mobile-nav">
     <ul class="mobile-nav-links">
       <li><a href="index.html" data-page="index">Home</a></li>
-        <li><a href="service.html" data-page="service">Service</a></li>
-        <li><a href="image.html" data-page="image">Image</a></li>
-        <li><a href="video.html" data-page="video">Video</a></li>
+        <li><a href="solutions.html" data-page="solutions">Solutions</a></li>
+        <li><a href="portfolio.html" data-page="portfolio">Portfolio</a></li>
         <li><a href="workflow.html" data-page="workflow">Workflow</a></li>
         <li><a href="contact.html" data-page="contact">Contact</a></li>
     </ul>
