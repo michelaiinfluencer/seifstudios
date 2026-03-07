@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────
-   PixelVibe AI — Shared Stylesheet
+   Seif Studios — Shared Stylesheet
    style.css
 ───────────────────────────────────────── */
 
@@ -178,13 +178,13 @@ section {
 }
 
 nav {
-
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   padding: 16px 60px;
   position: relative;
+  z-index: 100;
   transition: all 0.3s ease;
 }
 
@@ -197,11 +197,11 @@ nav {
   width: 100%;
   display: flex;
   justify-content: center;
-
   padding: 10px 20px 0;
-  /* Match navigation horizontal padding */
   transition: opacity 0.4s ease, transform 0.4s ease;
   will-change: opacity, transform;
+  pointer-events: none;
+  /* Prevents huge logo container from blocking navigation clicks */
 }
 
 .nav-logo {
@@ -210,6 +210,8 @@ nav {
   justify-content: center;
   text-decoration: none;
   text-align: center;
+  pointer-events: auto;
+  /* Re-enable clicks for the logo text itself */
 }
 
 .nav-logo-text {
@@ -222,46 +224,66 @@ nav {
 }
 
 .nav-logo-name {
-  font-size: 7rem;
+  font-size: 10rem;
   /* 2x increase */
-  font-weight: 700;
+  font-weight: 800;
   color: var(--white);
+  margin-left: 35px;
+  margin-top: -30px;
   /* White for visibility on video */
-  letter-spacing: -3px;
+  letter-spacing: 45px;
   text-transform: uppercase;
 }
 
+.home .nav-logo-name {
+  color: var(--black);
+}
+
 .nav-logo-sub {
-  font-size: 2.9rem;
-  font-family: var(--font-mono);
-  font-weight: 500;
+  font-size: 4rem;
+
+  font-weight: 800;
+
   color: var(--accent);
-  letter-spacing: 4px;
+  letter-spacing: 32px;
   text-transform: uppercase;
-  margin-top: 10px;
-  margin-left: 5px;
+  margin-top: 1px;
+  margin-left: 45px;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
   font-weight: 400;
-  gap: 39px;
+  gap: 15px;
+  /* Reduced gap to account for increased link padding */
   list-style: none;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(35, 35, 35, 0.301);
   font-size: var(--fs-base);
   font-weight: 500;
-  transition: color 0.2s;
+  transition: all 0.2s;
+  padding: 10px 15px;
+  /* Increased hover hitbox */
+  border-radius: 4px;
+}
+
+.home .nav-links a {
+  color: var(--black);
 }
 
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--accent);
   opacity: 1;
+  text-shadow:
+    -1px -1px 0 #1b1b1b2f,
+    1px -1px 0 #18181843,
+    -1px 1px 0 #1a1a1a3f,
+    1px 1px 0 #1c1c1c62;
 }
 
 .nav-sub-logo {
@@ -272,13 +294,14 @@ nav {
   display: flex;
   align-items: center;
   text-decoration: none;
+  font-weight: 700;
+  color: #fff;
+  font-size: 1.2rem;
+  letter-spacing: -1px;
+  text-transform: uppercase;
 }
 
-.nav-sub-logo img {
-  height: 50px;
-  /* Adjust based on logo proportions */
-  width: auto;
-}
+
 
 /* ─── SUBPAGE HEADER ─── */
 body.subpage .site-header nav {
@@ -379,11 +402,10 @@ body.home .nav-cta {
     left: 24px;
     top: auto;
     transform: none;
+    font-size: 1.1rem;
   }
 
-  .nav-sub-logo img {
-    height: 40px;
-  }
+
 
   nav {
     padding: 12px 24px;
@@ -518,8 +540,8 @@ body.menu-open .mobile-nav {
   justify-content: flex-end;
   /* Move content to the bottom */
   text-align: center;
-  padding: 0 24px 15vh;
-  /* Large bottom padding to leave room below */
+  padding: 0 24px 10vh;
+  /* Reduced bottom padding to move content further down */
 }
 
 /* Ensure the center of the screen stays clear */
@@ -558,6 +580,7 @@ body.menu-open .mobile-nav {
 
 .hero-overlay {
   position: absolute;
+
   inset: 0;
   background: linear-gradient(to bottom,
       rgba(0, 0, 0, 0.15) 0%,
@@ -571,6 +594,7 @@ body.menu-open .mobile-nav {
   z-index: 2;
   max-width: 820px;
   margin: 0 auto;
+
 }
 
 .hero-eyebrow {

@@ -1,5 +1,5 @@
 /**
- * PixelVibe AI - Navigation Component
+ * Seif Studios - Navigation Component
  */
 
 const navContent = `
@@ -7,7 +7,7 @@ const navContent = `
     <nav>
       <!-- Subpage Mini Logo (Left Corner) -->
       <a href="index.html" class="nav-sub-logo" id="navSubLogo">
-        <img src="assets/logoPixel2.png" alt="PixelVibe AI Logo">
+        Seif Studios
       </a>
 
       <ul class="nav-links">
@@ -29,8 +29,8 @@ const navContent = `
     <div class="logo-wrap" id="homeLogoWrap">
       <a href="index.html" class="nav-logo">
         <div class="nav-logo-text">
-          <span class="nav-logo-name">Pixel Vibe</span>
-          <span class="nav-logo-sub">AI Studio</span>
+          <span class="nav-logo-name">Seif</span>
+          <span class="nav-logo-sub">Studios</span>
         </div>
       </a>
     </div>

@@ -1,5 +1,5 @@
 /**
- * PixelVibe AI - Shared UI Logic
+ * Seif Studios - Shared UI Logic
  */
 
 document.addEventListener('DOMContentLoaded', () => {
