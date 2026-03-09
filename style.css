@@ -20,8 +20,8 @@
   --gray-300: #a1a1a6;
   --gray-500: #6e6e73;
   --gray-700: #1d1d1f;
-  --accent: #9bec10;
-  --accent-hover: #88ff00;
+  --accent: #ff0000;
+  --accent-hover: #dc0000;
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
@@ -262,28 +262,30 @@ nav {
 
 .nav-links a {
   text-decoration: none;
-  color: rgba(35, 35, 35, 0.301);
-  font-size: var(--fs-base);
+  color: rgba(0, 0, 0, 0.6);
+  font-size: var(--fs-lg);
   font-weight: 500;
   transition: all 0.2s;
-  padding: 10px 15px;
+  padding: 10px 6px;
   /* Increased hover hitbox */
   border-radius: 4px;
 }
+
+body.subpage .nav-links a {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 
 .home .nav-links a {
   color: var(--black);
 }
 
 .nav-links a:hover,
-.nav-links a.active {
+.nav-links a.active,
+body.subpage .nav-links a:hover,
+body.subpage .nav-links a.active {
   color: var(--accent);
   opacity: 1;
-  text-shadow:
-    -1px -1px 0 #1b1b1b2f,
-    1px -1px 0 #18181843,
-    -1px 1px 0 #1a1a1a3f,
-    1px 1px 0 #1c1c1c62;
 }
 
 .nav-sub-logo {
@@ -299,7 +301,13 @@ nav {
   font-size: 1.2rem;
   letter-spacing: -1px;
   text-transform: uppercase;
+  transition: color 0.2s;
 }
+
+body.subpage .nav-sub-logo {
+  color: var(--accent);
+}
+
 
 
 
