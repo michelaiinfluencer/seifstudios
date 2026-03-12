@@ -1740,12 +1740,24 @@ footer {
   }
 }
 
+/* ── Portfolio Page Spacing ── */
+body.portfolio main {
+  padding-top: 240px; /* Show "Our Work" below the giant logo on desktop */
+}
+
+body.portfolio main > .section-eyebrow {
+  padding-left: 24px; /* Align with sections gutter on desktop */
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ── Mobile section spacing — portfolio page only ── */
 @media (max-width: 850px) {
 
-  /* Clear fixed nav (75px) + eyebrow label that lives outside sections */
+  /* Clear fixed mobile nav (75px) */
   body.portfolio main {
-    padding-top: 86px;
+    padding-top: 96px;
   }
 
   /* Compact vertical spacing — scoped to portfolio only.
@@ -1755,6 +1767,12 @@ footer {
     padding-bottom: 24px !important;
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  /* Align eyebrow with section content on mobile */
+  body.portfolio main > .section-eyebrow {
+    padding-left: 20px;
+    margin-left: 0;
   }
 
   /* Tighten gallery header gap */
