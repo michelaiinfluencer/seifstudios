@@ -7,7 +7,7 @@ const navContent = `
     <nav>
       <!-- Subpage Mini Logo (Left Corner) -->
       <a href="index.html" id="navSubLogo" class="nav-sub-logo">
-        <img src="assets/Logo/LogoSSWhite1.png" alt="Logo">
+        <img src="assets/Logo/LogoSSWhite1.2.png" alt="Logo">
       </a>
 
       <ul class="nav-links">
@@ -27,10 +27,7 @@ const navContent = `
     <!-- Home Page Big Logo (Hidden on subpages) -->
     <div class="logo-wrap" id="homeLogoWrap" style="margin-left: 25px">
       <a href="solutions.html" class="nav-logo">
-        <div class="nav-logo-text">
-          <span class="nav-logo-name">Seif</span>
-          <span class="nav-logo-sub">Studios</span>
-        </div>
+        <img src="assets/Logo/logo3.2.png" alt="Seif Studios" class="nav-logo-img">
       </a>
     </div>
   </header>

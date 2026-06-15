@@ -216,6 +216,14 @@ nav {
   /* Re-enable clicks for the logo text itself */
 }
 
+.nav-logo-img {
+  width: 750px;
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 .nav-logo-text {
   display: flex;
   margin-top: 10px;
@@ -309,7 +317,7 @@ body.subpage .nav-links a.active {
 }
 
 .nav-sub-logo img {
-  height: 40px;
+  height: 27px;
   width: auto;
   display: block;
 }
